@@ -25,6 +25,7 @@
     "npm:globals@^17.6.0": "17.6.0",
     "npm:path-to-regexp@^6.3.0": "6.3.0",
     "npm:react-dom@^19.2.6": "19.2.6_react@19.2.6",
+    "npm:react-router-dom@^7.14.2": "7.15.1_react@19.2.6_react-dom@19.2.6__react@19.2.6",
     "npm:react@^19.2.6": "19.2.6",
     "npm:typescript-eslint@^8.59.2": "8.59.4_eslint@10.4.0_typescript@6.0.3",
     "npm:typescript@~6.0.2": "6.0.3",
@@ -645,6 +646,9 @@
     "convert-source-map@2.0.0": {
       "integrity": "sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg=="
     },
+    "cookie@1.1.1": {
+      "integrity": "sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ=="
+    },
     "cross-spawn@7.0.6": {
       "integrity": "sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==",
       "dependencies": [
@@ -1056,6 +1060,26 @@
         "scheduler"
       ]
     },
+    "react-router-dom@7.15.1_react@19.2.6_react-dom@19.2.6__react@19.2.6": {
+      "integrity": "sha512-AzF62gjY6U9rkMq4RfP/r2EVtQ7DMfNMjyOp/flLTCrtRylLiK4wT4pSq6O8rOXZ2eXdZYJPEYe+ifomiv+Igg==",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "react-router"
+      ]
+    },
+    "react-router@7.15.1_react@19.2.6_react-dom@19.2.6__react@19.2.6": {
+      "integrity": "sha512-R8rl9HhgikFYoPJymnUtPXWbnDb3oget6lQnfIoupbt61aT9aOhRkDsY2XRhZRyX1Z/8a5sL74fXmFNm3NRK5A==",
+      "dependencies": [
+        "cookie",
+        "react",
+        "react-dom",
+        "set-cookie-parser"
+      ],
+      "optionalPeers": [
+        "react-dom"
+      ]
+    },
     "react@19.2.6": {
       "integrity": "sha512-sfWGGfavi0xr8Pg0sVsyHMAOziVYKgPLNrS7ig+ivMNb3wbCBw3KxtflsGBAwD3gYQlE/AEZsTLgToRrSCjb0Q=="
     },
@@ -1094,6 +1118,9 @@
     "semver@7.8.1": {
       "integrity": "sha512-rkVq3IXh+4FDGch+KwzX3aV9W3kO54GyEgpvBzSyctDA6Xtd7RJQV1xmXbeQp5v7+VzLOfVqiutSE6GICgPFvg==",
       "bin": true
+    },
+    "set-cookie-parser@2.7.2": {
+      "integrity": "sha512-oeM1lpU/UvhTxw+g3cIfxXHyJRc/uidd3yK1P242gzHds0udQBYzs3y8j4gCCW+ZJ7ad0yctld8RYO+bdurlvw=="
     },
     "shebang-command@2.0.0": {
       "integrity": "sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==",
@@ -1221,6 +1248,7 @@
       "npm:eslint@^10.3.0",
       "npm:globals@^17.6.0",
       "npm:react-dom@^19.2.6",
+      "npm:react-router-dom@^7.14.2",
       "npm:react@^19.2.6",
       "npm:typescript-eslint@^8.59.2",
       "npm:typescript@~6.0.2",
