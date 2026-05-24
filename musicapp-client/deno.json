@@ -9,7 +9,8 @@
         "types": [
             "react",
             "react-dom",
-            "@types/react"
+            "@types/react",
+            "vite/client"
         ],
         "lib": [
             "dom",
