@@ -1,6 +1,6 @@
 export interface BaseResponse {
-	responseStarted: Date;
-	statusCode: number;
+	responseStarted?: Date;
+	statusCode?: number;
 }
 
 export interface BaseListResponse<T> extends BaseResponse {
