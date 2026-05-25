@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FC } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 // Pages
@@ -11,7 +11,7 @@ import NotFound from './pages/NotFound/NotFound.tsx';
 import AdminRoute from './components/AdminRoute/AdminRoute.tsx';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.tsx';
 
-const App: FC = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
