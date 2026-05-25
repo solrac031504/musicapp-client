@@ -1,21 +1,30 @@
-name: CI
+name: MusicApp-Client CI
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+  push:
+    branches:
+      - '*'
 
 jobs:
-  type-check:
-    name: Install and type check
+  musicapp-client-validation:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: musicapp-client
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v6
 
-      - uses: denoland/setup-deno@v2
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
 
