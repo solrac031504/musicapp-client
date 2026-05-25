@@ -1,17 +1,47 @@
-import { Route, Routes } from 'react-router-dom';
-import { AdminRoute, Login, ProtectedRoute } from '../features/auth/index.ts';
+import { Route, Routes } from "react-router-dom";
+import { AdminRoute, Login, ProtectedRoute } from "../features/auth/index.ts";
+import Genre from "../features/auth/pages/Genre/Genre.tsx";
 import GenreList from "../features/auth/pages/GenreList/GenreList.tsx";
-import Home from '../features/auth/pages/Home/Home.tsx';
-import NotFound from '../features/auth/pages/NotFound/NotFound.tsx';
+import Home from "../features/auth/pages/Home/Home.tsx";
+import NotFound from "../features/auth/pages/NotFound/NotFound.tsx";
 
 const AppRoutes = () => (
-    <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-        <Route path="/genres" element={<ProtectedRoute><GenreList /></ProtectedRoute>} />
-        <Route path="/secret" element={<AdminRoute><h1>Secret</h1></AdminRoute>} />
-        <Route path="*" element={<NotFound />} />
-    </Routes>
+	<Routes>
+		<Route path="/" element={<Login />} />
+		<Route
+			path="/home"
+			element={
+				<ProtectedRoute>
+					<Home />
+				</ProtectedRoute>
+			}
+		/>
+		<Route
+			path="/genres"
+			element={
+				<ProtectedRoute>
+					<GenreList />
+				</ProtectedRoute>
+			}
+		/>
+		<Route
+			path="/genre/:id"
+			element={
+				<ProtectedRoute>
+					<Genre />
+				</ProtectedRoute>
+			}
+		/>
+		<Route
+			path="/secret"
+			element={
+				<AdminRoute>
+					<h1>Secret</h1>
+				</AdminRoute>
+			}
+		/>
+		<Route path="*" element={<NotFound />} />
+	</Routes>
 );
 
 export default AppRoutes;
