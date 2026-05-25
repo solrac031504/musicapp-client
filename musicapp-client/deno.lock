@@ -15,10 +15,12 @@
     "jsr:@tajpouria/cors@^1.2.1": "1.2.1",
     "npm:@deno/vite-plugin@^2.0.2": "2.0.2_vite@8.0.14__@types+node@24.12.4",
     "npm:@eslint/js@^10.0.1": "10.0.1_eslint@10.4.0",
+    "npm:@types/bootstrap@^5.2.10": "5.2.10",
     "npm:@types/node@^24.12.3": "24.12.4",
     "npm:@types/react-dom@^19.2.3": "19.2.3_@types+react@19.2.15",
     "npm:@types/react@^19.2.15": "19.2.15",
     "npm:@vitejs/plugin-react@^6.0.2": "6.0.2_vite@8.0.14__@types+node@24.12.4",
+    "npm:bootstrap@^5.3.8": "5.3.8_@popperjs+core@2.11.8",
     "npm:eslint-plugin-react-hooks@^7.1.1": "7.1.1_eslint@10.4.0",
     "npm:eslint-plugin-react-refresh@~0.5.2": "0.5.2_eslint@10.4.0",
     "npm:eslint@^10.3.0": "10.4.0",
@@ -377,6 +379,9 @@
     "@oxc-project/types@0.132.0": {
       "integrity": "sha512-FESMOxil5Se014ui/Eq8fT5uHJo6nIRwH0PfJrZJXs6Gek3ZVFOrpUv3YIZT20m+extU98Hg1Ym72U58rlsxUQ=="
     },
+    "@popperjs/core@2.11.8": {
+      "integrity": "sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A=="
+    },
     "@rolldown/binding-android-arm64@1.0.2": {
       "integrity": "sha512-ZS4D1JPGn/MYQN/SYDWftIE/nVsM8j/AFOYEzAoOE2O3NktQOZru+/vYXGbR/qtdLdIfGCP0lcoJiYVzsEz+iQ==",
       "os": ["android"],
@@ -463,6 +468,12 @@
       "integrity": "sha512-RoBvJ2X0wuKlWFIjrwffGw1IqZHKQqzIchKaadZZfnNpsAYp2mM0h36JtPCjNDAHGgYez/15uMBpfGwchhiMgg==",
       "dependencies": [
         "tslib"
+      ]
+    },
+    "@types/bootstrap@5.2.10": {
+      "integrity": "sha512-F2X+cd6551tep0MvVZ6nM8v7XgGN/twpdNDjqS1TUM7YFNEtQYWk+dKAnH+T1gr6QgCoGMPl487xw/9hXooa2g==",
+      "dependencies": [
+        "@popperjs/core"
       ]
     },
     "@types/esrecurse@4.3.1": {
@@ -622,6 +633,12 @@
     "baseline-browser-mapping@2.10.32": {
       "integrity": "sha512-wbPvpyjJPC0zdfdKXxqEL3Ea+bOMD/87X4lftiJkkaBiuG6ALQy1SLmEd7BSmVCuwCQsBrCamgBoLyfFDD1EPg==",
       "bin": true
+    },
+    "bootstrap@5.3.8_@popperjs+core@2.11.8": {
+      "integrity": "sha512-HP1SZDqaLDPwsNiqRqi5NcP0SSXciX2s9E+RyqJIIqGo+vJeN5AJVM98CXmW/Wux0nQ5L7jeWUdplCEf0Ee+tg==",
+      "dependencies": [
+        "@popperjs/core"
+      ]
     },
     "brace-expansion@5.0.5": {
       "integrity": "sha512-VZznLgtwhn+Mact9tfiwx64fA9erHH/MCXEUfB/0bX/6Fz6ny5EGTXYltMocqg4xFAQZtnO3DHWWXi8RiuN7cQ==",
@@ -1239,10 +1256,12 @@
       "jsr:@tajpouria/cors@^1.2.1",
       "npm:@deno/vite-plugin@^2.0.2",
       "npm:@eslint/js@^10.0.1",
+      "npm:@types/bootstrap@^5.2.10",
       "npm:@types/node@^24.12.3",
       "npm:@types/react-dom@^19.2.3",
       "npm:@types/react@^19.2.15",
       "npm:@vitejs/plugin-react@^6.0.2",
+      "npm:bootstrap@^5.3.8",
       "npm:eslint-plugin-react-hooks@^7.1.1",
       "npm:eslint-plugin-react-refresh@~0.5.2",
       "npm:eslint@^10.3.0",
