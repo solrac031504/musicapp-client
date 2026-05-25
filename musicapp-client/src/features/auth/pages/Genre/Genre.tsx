@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { apiRequest } from "../../../../services/api.client.ts";
-import { GenreResponse } from "../../types/Genre.types.ts";
+import type { GenreResponse } from "../../types/Genre.types.ts";
 
 const Genre: React.FC = () => {
 	const _navigate = useNavigate();
@@ -37,7 +37,7 @@ const Genre: React.FC = () => {
 		const genreId = isNaN(Number(id)) ? -1 : parseInt(id!);
 
 		getGenre(genreId);
-	});
+	}, []);
 
 	if (isLoading) {
 		return <div>Loading...</div>;
