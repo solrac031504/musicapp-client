@@ -31,7 +31,7 @@ const Login: React.FC = () => {
     
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
-        setLoading(false);
+        setLoading(true);
         setError('');
 
         const req = {
