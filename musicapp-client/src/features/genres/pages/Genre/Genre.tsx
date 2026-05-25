@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { apiRequest } from "../../../../services/api.client.ts";
 import { isAdminUser } from "../../../auth/index.ts";
-import type { GenreResponse } from "../../types/Genre.types.ts";
+import { getCurrentUser } from "../../../shared/utils/session-info.ts";
+import type { GenreRequest, GenreResponse, UpdateGenreRequest } from "../../types/Genre.types.ts";
 import styles from "./Genre.module.css";
 
 const Genre: React.FC = () => {
@@ -12,15 +13,19 @@ const Genre: React.FC = () => {
 
 	const [genreName, setGenreName] = useState<string>("");
 	const [genreDescription, setGenreDescription] = useState<string>("");
+	const [editedDescription, setEditedDescription] = useState<string>("");
+	const [createdBy, setCreatedBy] = useState<string>("");
 	// const [genreHierarchy, setGenreHierarchy] = useState<string[]>([]);
 	const genreHierarchy: string[] = []; // TODO: get genre hierarchy
+	const [isEditing, setIsEditing] = useState<boolean>(false);
+	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const getGenre = async (genreId: number): Promise<void> => {
 		try {
 			setIsLoading(true);
 
-			const result = await apiRequest<GenreResponse>(`/genres/${genreId}`, {
+			const result = await apiRequest<GenreRequest, GenreResponse>(`/genres/${genreId}`, {
 				method: "GET",
 			});
 
@@ -28,6 +33,7 @@ const Genre: React.FC = () => {
 
 			setGenreName(genre.genreName);
 			setGenreDescription(genre.description);
+			setCreatedBy(genre.createdBy);
 		} catch (err) {
 			console.error("Error retrieving genre info:", err);
 		} finally {
@@ -42,9 +48,41 @@ const Genre: React.FC = () => {
 		getGenre(genreId);
 	}, [id]);
 
-	const handleEdit = (): void => {
-		// TODO: implement edit navigation / modal
-		console.log("Edit genre", id);
+	const handleEditStart = (): void => {
+		setEditedDescription(genreDescription);
+		setIsEditing(true);
+	};
+
+	const handleCancel = (): void => {
+		setEditedDescription("");
+		setIsEditing(false);
+	};
+
+	const handleSave = async (): Promise<void> => {
+		try {
+			setIsSaving(true);
+
+			const request = {
+				item: {
+					genreName: genreName,
+					description: editedDescription,
+					createdBy: createdBy,
+					modifiedBy: getCurrentUser(),
+				},
+			} as UpdateGenreRequest;
+
+			const updatedGenre = await apiRequest<UpdateGenreRequest, GenreResponse>(`/genres/${id}`, {
+				method: "PATCH",
+				body: request,
+			});
+
+			setGenreDescription(updatedGenre.item.description);
+			setIsEditing(false);
+		} catch (err) {
+			console.error("Error saving genre description:", err);
+		} finally {
+			setIsSaving(false);
+		}
 	};
 
 	const handleDelete = async (): Promise<void> => {
@@ -70,13 +108,13 @@ const Genre: React.FC = () => {
 			<main className={styles.content}>
 				<div className={styles.header}>
 					<h1 className={styles.title}>{genreName}</h1>
-					{isAdmin && (
+					{isAdmin && !isEditing && (
 						<div className={styles.adminActions}>
 							<button
 								className={styles.editButton}
-								onClick={handleEdit}
-								title="Edit genre"
-								aria-label="Edit genre"
+								onClick={handleEditStart}
+								title="Edit description"
+								aria-label="Edit description"
 								type="button"
 							>
 								Edit
@@ -92,7 +130,39 @@ const Genre: React.FC = () => {
 						</div>
 					)}
 				</div>
-				<p className={styles.description}>{genreDescription}</p>
+
+				{isEditing
+					? (
+						<div className={styles.editSection}>
+							<textarea
+								className={styles.textarea}
+								value={editedDescription}
+								onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setEditedDescription(e.target.value)}
+								rows={5}
+								autoFocus
+								disabled={isSaving}
+							/>
+							<div className={styles.editActions}>
+								<button
+									className={styles.saveButton}
+									onClick={handleSave}
+									disabled={isSaving}
+									type="submit"
+								>
+									{isSaving ? "Saving..." : "Save"}
+								</button>
+								<button
+									className={styles.cancelButton}
+									onClick={handleCancel}
+									disabled={isSaving}
+									type="reset"
+								>
+									Cancel
+								</button>
+							</div>
+						</div>
+					)
+					: <p className={styles.description}>{genreDescription}</p>}
 				<table>
 					<thead>
 						<tr>

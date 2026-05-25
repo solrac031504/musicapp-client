@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiRequest } from "../../../../services/api.client.ts";
+import type { BaseRequest } from "../../../../types/api.request-types.ts";
 import type { GenreListResponse } from "../../types/Genre.types.ts";
 import styles from "./GenreList.module.css";
 
@@ -17,9 +18,7 @@ const GenreList: React.FC = () => {
 		try {
 			setIsLoading(true);
 
-			const result = await apiRequest<GenreListResponse>("/genres", {
-				method: "GET",
-			});
+			const result = await apiRequest<BaseRequest, GenreListResponse>("/genres");
 
 			setGenres(result);
 		} catch (err) {

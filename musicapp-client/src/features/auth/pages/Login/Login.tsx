@@ -1,49 +1,49 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { apiRequest } from "../../../../services/api.client.ts";
 import type { LoginRequest, LoginResponse } from "../../types/Login.types.ts";
-import styles from './Login.module.css';
+import styles from "./Login.module.css";
 
 const Login: React.FC = () => {
 	const navigate = useNavigate();
 
-	const [username, setUsername] = useState<string>('');
-	const [password, setPassword] = useState<string>('');
+	const [username, setUsername] = useState<string>("");
+	const [password, setPassword] = useState<string>("");
 	const [loading, setLoading] = useState<boolean>(false);
-	const [error, setError] = useState<string>('');
+	const [error, setError] = useState<string>("");
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault();
 		setLoading(true);
-		setError('');
+		setError("");
 
 		const req = {
 			item: {
 				username,
-				password
-			}
+				password,
+			},
 		} as LoginRequest;
 
 		try {
-			const result = await apiRequest<LoginResponse>('/login', {
-				method: 'POST',
-				body: req
+			const result = await apiRequest<LoginRequest, LoginResponse>("/login", {
+				method: "POST",
+				body: req,
 			});
 
 			if (result.item.isAuthenticated) {
 				const loginExpiration = new Date(result.item.authExpiration!);
 
-				sessionStorage.setItem('user', username);
-				sessionStorage.setItem('loginExpiration', loginExpiration.toISOString());
-				sessionStorage.setItem('isAdmin', result.item.isAdmin.toString());
+				sessionStorage.setItem("user", username);
+				sessionStorage.setItem("loginExpiration", loginExpiration.toISOString());
+				sessionStorage.setItem("isAdmin", result.item.isAdmin.toString());
 
-				navigate('/home');
+				navigate("/home");
 			} else {
-				setError(result.item.errorMessage ?? 'Invalid credentials');
+				setError(result.item.errorMessage ?? "Invalid credentials");
 			}
 		} catch (err) {
-			console.error('Login error:', err);
-			setError(err instanceof Error ? err.message : 'Login failed. Please try again');
+			console.error("Login error:", err);
+			setError(err instanceof Error ? err.message : "Login failed. Please try again");
 		} finally {
 			setLoading(false);
 		}
@@ -87,14 +87,16 @@ const Login: React.FC = () => {
 					</div>
 
 					<button type="submit" className={styles.loginButton} disabled={loading}>
-						{loading ? (
-							<>
-								<span className={styles.loading} />
-								Logging in...
-							</>
-						) : (
-							'Log In'
-						)}
+						{loading
+							? (
+								<>
+									<span className={styles.loading} />
+									Logging in...
+								</>
+							)
+							: (
+								"Log In"
+							)}
 					</button>
 				</form>
 			</div>
