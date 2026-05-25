@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { isAuthenticated } from '../../utils/authentication/authentication.ts';
+import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../../auth/index.ts";
 
 const REDIRECT_SECONDS = 10;
 
@@ -9,7 +9,7 @@ const NotFound: React.FC = () => {
 	const [secondsLeft, setSecondsLeft] = useState(REDIRECT_SECONDS);
 
 	useEffect(() => {
-		const timerId = setTimeout(() => navigate('/home'), REDIRECT_SECONDS * 1000);
+		const timerId = setTimeout(() => navigate("/home"), REDIRECT_SECONDS * 1000);
 		return () => clearTimeout(timerId);
 	}, [navigate]);
 

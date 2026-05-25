@@ -10,7 +10,7 @@ const Genre: React.FC = () => {
 	const [genreName, setGenreName] = useState<string>("");
 	const [genreDescription, setGenreDescription] = useState<string>("");
 	// const [genreHierarchy, setGenreHierarchy] = useState<string[]>([]);
-	const genreHierarchy: string[] = [];
+	const genreHierarchy: string[] = []; // TODO: get genre hierarchy
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const getGenre = async (genreId: number): Promise<void> => {
@@ -34,10 +34,10 @@ const Genre: React.FC = () => {
 
 	// Get the genre
 	useEffect(() => {
-		const genreId = isNaN(Number(id)) ? -1 : parseInt(id!);
+		const genreId = isNaN(Number(id)) ? -1 : parseInt(id!, 10);
 
 		getGenre(genreId);
-	}, []);
+	}, [id]);
 
 	if (isLoading) {
 		return <div>Loading...</div>;

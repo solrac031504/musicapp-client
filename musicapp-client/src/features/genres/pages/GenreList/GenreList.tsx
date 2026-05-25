@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { apiRequest } from "../../../../services/api.client.ts";
 import type { GenreListResponse } from "../../types/Genre.types.ts";
 import styles from "./GenreList.module.css";
@@ -52,12 +52,12 @@ const GenreList: React.FC = () => {
 						{genres.items.map((genre) => (
 							<tr key={genre.id} className={styles.row}>
 								<td className={styles.cell}>
-									<a
-										href={`/genre/${genre.id}`}
+									<Link
+										to={`/genre/${genre.id}`}
 										className={styles.genreLink}
 									>
 										{genre.genreName}
-									</a>
+									</Link>
 								</td>
 							</tr>
 						))}

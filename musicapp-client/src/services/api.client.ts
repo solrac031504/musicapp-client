@@ -15,9 +15,9 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
 
 	if (!res.ok) throw new Error(`HTTP error: status ${res.status}`);
 
-	const retVal = res.json() as Promise<T>;
+	const data = await res.json() as T;
 
-	if (ENV === "development") console.log(await retVal);
+	if (ENV === "development") console.log(data);
 
-	return retVal;
+	return data;
 }
