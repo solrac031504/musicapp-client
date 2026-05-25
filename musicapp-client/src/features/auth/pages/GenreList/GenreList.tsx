@@ -67,3 +67,5 @@ const GenreList: React.FC = () => {
         </div>
     );
 }
+
+export default GenreList;
