@@ -1,0 +1,35 @@
+name: MusicApp-Client CI
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  musicapp-client-validation:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: musicapp-client
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Install dependencies
+        run: deno install
+
+      - name: Show outdated packages
+        run: deno outdated
+
+      - name: Type check
+        run: deno check src

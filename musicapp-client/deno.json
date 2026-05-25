@@ -1,0 +1,51 @@
+{
+    "tasks": {
+        "dev": "deno run -A npm:vite",
+        "build": "deno run -A npm:vite build",
+        "serve": "deno run build"
+    },
+    "nodeModulesDir": "auto",
+    "compilerOptions": {
+        "types": [
+            "react",
+            "react-dom",
+            "@types/react",
+            "vite/client"
+        ],
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "deno.ns"
+        ],
+        "jsx": "react-jsx",
+        "jsxImportSource": "react"
+    },
+    "imports": {
+        "@deno/vite-plugin": "npm:@deno/vite-plugin@^2.0.2",
+        "@oak/oak": "jsr:@oak/oak@^17.2.0",
+        "@tajpouria/cors": "jsr:@tajpouria/cors@^1.2.1",
+        "@types/node": "npm:@types/node@^25.9.1",
+        "@types/react": "npm:@types/react@^19.2.15",
+        "@types/react-dom": "npm:@types/react-dom@^19.2.3",
+        "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^6.0.2",
+        "react": "npm:react@^19.2.6",
+        "react-dom": "npm:react-dom@^19.2.6",
+        "react-router-dom": "npm:react-router-dom@^7.15.1",
+        "lucide-react": "npm:lucide@^1.16.0",
+        "vite": "npm:vite@^8.0.14",
+        "@eslint/js": "npm:@eslint/js@^10.0.1",
+        "eslint": "npm:eslint@^10.4.0",
+        "eslint-plugin-react-hooks": "npm:eslint-plugin-react-hooks@^7.1.1",
+        "eslint-plugin-react-refresh": "npm:eslint-plugin-react-refresh@^0.5.2",
+        "globals": "npm:globals@^17.6.0",
+        "typescript": "npm:typescript@~6.0.3",
+        "typescript-eslint": "npm:typescript-eslint@^8.60.0",
+        "bootstrap": "npm:bootstrap@^5.3.8",
+        "@types/bootstrap": "npm:@types/bootstrap@^5.2.10"
+    },
+    "fmt": {
+        "indentWidth": 4,
+        "useTabs": true,
+        "lineWidth": 160
+    }
+}
