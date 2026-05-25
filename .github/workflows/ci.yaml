@@ -22,5 +22,8 @@ jobs:
       - name: Install dependencies
         run: deno install
 
+      - name: Audit dependencies
+        run: deno audit
+
       - name: Type check
         run: deno check src
