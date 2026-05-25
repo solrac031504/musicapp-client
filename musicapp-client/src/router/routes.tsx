@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { AdminRoute, Login, ProtectedRoute } from '../features/auth/index.ts';
-import Home from "../pages/Home/Home.tsx";
-import NotFound from '../pages/NotFound/NotFound.tsx';
+import Home from '../features/auth/pages/Home/Home.tsx';
+import NotFound from '../features/auth/pages/NotFound/NotFound.tsx';
 
 const AppRoutes = () => (
     <Routes>
