@@ -4,10 +4,19 @@ import styles from './Login.module.css'; // Import as styles object
 
 // Types for API response
 interface LoginResponse {
-    authenticated: boolean;
-    loginExpiration?: Date;
-    admin?: boolean;
-    error?: string;
+    item: {
+        isAuthenticated: boolean;
+        authExpiration: Date | null;
+        isAdmin: boolean;
+        errorMessage: string | null;
+    }
+}
+
+interface LoginRequest {
+    item: {
+        username: string;
+        password: string;
+    }
 }
 
 const Login: React.FC = () => {
@@ -21,7 +30,58 @@ const Login: React.FC = () => {
     const baseUrl = "http://localhost:5000"
     
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-        // ... your existing handleSubmit logic remains exactly the same ...
+        e.preventDefault();
+        setLoading(false);
+        setError('');
+
+        const req = {
+            item: {
+                username: username,
+                password: password
+            }
+        } as LoginRequest;
+
+        // Get login from api
+        console.log(`Attempting to login user ${username}`);
+
+        try {
+            const res = await fetch(`${baseUrl}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(req)
+            });
+
+            if (!res.ok) throw new Error(`HTTP error: status ${res.status}`);
+
+            const result: LoginResponse = await res.json();
+
+            console.log(result);
+
+            if (result.item.isAuthenticated) {
+                const loginExpiration = new Date(result.item.authExpiration!);
+                const isAdmin = result.item.isAdmin;
+
+                // Save auth data
+                sessionStorage.setItem('user', username);
+                sessionStorage.setItem('loginExpiration', loginExpiration.toISOString());
+                sessionStorage.setItem('isAdmin', isAdmin.toString());
+
+                console.log(`user: ${username}`);
+                console.log(`loginExpiration: ${loginExpiration.toISOString()}`);
+                console.log(`isAdmin: ${isAdmin}`);
+
+                navigate('/home');
+            } else {
+                setError(result.item.errorMessage || 'Invalid credentials');
+            }
+        } catch (err) {
+            console.error('Login error:', err);
+            setError(err instanceof Error ? err.message : 'Login failed. Please try again');
+        } finally {
+            setLoading(false);
+        }
     }
     
     return (
