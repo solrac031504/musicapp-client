@@ -1,5 +1,5 @@
-const BASE_URL = Deno.env.get("REACT_BASE_URL") || "http://localhost:5000";
-const ENV = Deno.env.get("REACT_ENV") || "development";
+const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:5000";
+const ENV = import.meta.env.VITE_ENV || "development";
 
 interface RequestOptions {
 	method?: "GET" | "POST" | "PATCH" | "DELETE";
@@ -15,7 +15,9 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
 
 	if (!res.ok) throw new Error(`HTTP error: status ${res.status}`);
 
-	if (BASE_URL === "development") console.log(res.json() as T);
+	const retVal = res.json() as Promise<T>;
 
-	return res.json() as Promise<T>;
+	if (ENV === "development") console.log(await retVal);
+
+	return retVal;
 }

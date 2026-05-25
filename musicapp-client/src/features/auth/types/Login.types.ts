@@ -1,5 +1,5 @@
-import { BaseItemRequest } from "../../../types/api.request-types.ts";
-import { BaseItemResponse } from "../../../types/api.response-types.ts";
+import type { BaseItemRequest } from "../../../types/api.request-types.ts";
+import type { BaseItemResponse } from "../../../types/api.response-types.ts";
 
 interface LoginRequestPayload {
 	username: string;
