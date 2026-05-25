@@ -17,10 +17,6 @@ const Login: React.FC = () => {
 		setLoading(true);
 		setError('');
 
-		// const req: LoginRequest = {
-		// 	item: { username, password },
-		// };
-
 		const req = {
 			item: {
 				username,

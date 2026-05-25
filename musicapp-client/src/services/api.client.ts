@@ -1,4 +1,5 @@
 const BASE_URL = Deno.env.get("REACT_BASE_URL") || "http://localhost:5000";
+const ENV = Deno.env.get("REACT_ENV") || "development";
 
 interface RequestOptions {
 	method?: "GET" | "POST" | "PATCH" | "DELETE";
@@ -13,6 +14,8 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
 	});
 
 	if (!res.ok) throw new Error(`HTTP error: status ${res.status}`);
+
+	if (BASE_URL === "development") console.log(res.json() as T);
 
 	return res.json() as Promise<T>;
 }
