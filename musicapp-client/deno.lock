@@ -13,13 +13,13 @@
     "jsr:@std/media-types@1": "1.1.0",
     "jsr:@std/path@1": "1.1.4",
     "jsr:@tajpouria/cors@^1.2.1": "1.2.1",
-    "npm:@deno/vite-plugin@^2.0.2": "2.0.2_vite@8.0.14__@types+node@24.12.4",
+    "npm:@deno/vite-plugin@^2.0.2": "2.0.2_vite@8.0.14__@types+node@25.9.1_@types+node@25.9.1",
     "npm:@eslint/js@^10.0.1": "10.0.1_eslint@10.4.0",
     "npm:@types/bootstrap@^5.2.10": "5.2.10",
-    "npm:@types/node@^24.12.4": "24.12.4",
+    "npm:@types/node@^25.9.1": "25.9.1",
     "npm:@types/react-dom@^19.2.3": "19.2.3_@types+react@19.2.15",
     "npm:@types/react@^19.2.15": "19.2.15",
-    "npm:@vitejs/plugin-react@^6.0.2": "6.0.2_vite@8.0.14__@types+node@24.12.4",
+    "npm:@vitejs/plugin-react@^6.0.2": "6.0.2_vite@8.0.14__@types+node@25.9.1_@types+node@25.9.1",
     "npm:bootstrap@^5.3.8": "5.3.8_@popperjs+core@2.11.8",
     "npm:eslint-plugin-react-hooks@^7.1.1": "7.1.1_eslint@10.4.0",
     "npm:eslint-plugin-react-refresh@~0.5.2": "0.5.2_eslint@10.4.0",
@@ -31,7 +31,7 @@
     "npm:react@^19.2.6": "19.2.6",
     "npm:typescript-eslint@^8.59.4": "8.59.4_eslint@10.4.0_typescript@6.0.3",
     "npm:typescript@~6.0.3": "6.0.3",
-    "npm:vite@^8.0.14": "8.0.14_@types+node@24.12.4"
+    "npm:vite@^8.0.14": "8.0.14_@types+node@25.9.1"
   },
   "jsr": {
     "@oak/commons@1.0.1": {
@@ -212,7 +212,7 @@
         "@babel/helper-validator-identifier"
       ]
     },
-    "@deno/vite-plugin@2.0.2_vite@8.0.14__@types+node@24.12.4": {
+    "@deno/vite-plugin@2.0.2_vite@8.0.14__@types+node@25.9.1_@types+node@25.9.1": {
       "integrity": "sha512-bzuKApn9Jr2x1jSrbuJEJzy++8LUwjFVOAopAbepcE3RgYzdcPEWd36PSp7P5dNMQlNnQlgtm3MeNbcKZ/Eh/Q==",
       "dependencies": [
         "@deno/loader@npm:@jsr/deno__loader@0.5.0",
@@ -484,8 +484,8 @@
     "@types/json-schema@7.0.15": {
       "integrity": "sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA=="
     },
-    "@types/node@24.12.4": {
-      "integrity": "sha512-GUUEShf+PBCGW2KaXwcIt3Yk+e3pkKwWKb9GSyM9WQVE+ep2jzmHdGsHzu4wgcZy5fN9FBdVzjpBQsYlpfpgLA==",
+    "@types/node@25.9.1": {
+      "integrity": "sha512-xfrlY7UD5rMJk3ZVJP8BNzS28J36YJg+xp+LPXV1TdWxr8uMH5A860QNxYDGQe/ylDSgjxE52Q9VnO7p75tJxg==",
       "dependencies": [
         "undici-types"
       ]
@@ -600,7 +600,7 @@
         "eslint-visitor-keys@5.0.1"
       ]
     },
-    "@vitejs/plugin-react@6.0.2_vite@8.0.14__@types+node@24.12.4": {
+    "@vitejs/plugin-react@6.0.2_vite@8.0.14__@types+node@25.9.1_@types+node@25.9.1": {
       "integrity": "sha512-DlSMqo4WhThw4vB8Mpn0Woe9J+Jfq1geJ61AKW0QEgLzGMNwtIMdxbDUzLxcun8W7NbJO0e2Jg/Nxm3cCSVzzg==",
       "dependencies": [
         "@rolldown/pluginutils",
@@ -1187,8 +1187,8 @@
       "integrity": "sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==",
       "bin": true
     },
-    "undici-types@7.16.0": {
-      "integrity": "sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw=="
+    "undici-types@7.24.6": {
+      "integrity": "sha512-WRNW+sJgj5OBN4/0JpHFqtqzhpbnV0GuB+OozA9gCL7a993SmU+1JBZCzLNxYsbMfIeDL+lTsphD5jN5N+n0zg=="
     },
     "update-browserslist-db@1.2.3_browserslist@4.28.2": {
       "integrity": "sha512-Js0m9cx+qOgDxo0eMiFGEueWztz+d4+M3rGlmKPT+T4IS/jP4ylw3Nwpu6cpTTP8R1MAC1kF4VbdLt3ARf209w==",
@@ -1205,7 +1205,7 @@
         "punycode"
       ]
     },
-    "vite@8.0.14_@types+node@24.12.4": {
+    "vite@8.0.14_@types+node@25.9.1": {
       "integrity": "sha512-s4BJJ+5y1pYL6Otw51FHhVJQhPnuRinKig64g/1+EUNaJsd3gCKdD31IPFvswUgW9/60QT9oFHbZHbQK5imcxw==",
       "dependencies": [
         "@types/node",
@@ -1256,7 +1256,7 @@
       "npm:@deno/vite-plugin@^2.0.2",
       "npm:@eslint/js@^10.0.1",
       "npm:@types/bootstrap@^5.2.10",
-      "npm:@types/node@^24.12.4",
+      "npm:@types/node@^25.9.1",
       "npm:@types/react-dom@^19.2.3",
       "npm:@types/react@^19.2.15",
       "npm:@vitejs/plugin-react@^6.0.2",

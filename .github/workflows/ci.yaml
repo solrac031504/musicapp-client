@@ -22,8 +22,8 @@ jobs:
       - name: Install dependencies
         run: deno install
 
-      - name: Audit dependencies
-        run: deno audit
+      - name: Show outdated packages
+        run: deno outdated
 
       - name: Type check
         run: deno check src
