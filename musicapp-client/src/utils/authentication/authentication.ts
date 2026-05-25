@@ -1,20 +1,12 @@
-// Check if the user is authenticated
 export const isAuthenticated = (): boolean => {
-	// Get auth details from session storage
-	const user = sessionStorage.getItem("user");
-	const loginExpiration = sessionStorage.getItem("loginExpiration");
+	const user = sessionStorage.getItem('user');
+	const loginExpiration = sessionStorage.getItem('loginExpiration');
 
-	const loginExpirationDate = new Date(loginExpiration!);
+	if (!user || !loginExpiration) return false;
 
-	const nowUTC = new Date();
-
-	// Return true if user exists AND now is before loginExpiration (in UTC)
-	return ((!!user) && (nowUTC <= loginExpirationDate));
+	return new Date() <= new Date(loginExpiration);
 };
 
 export const isAdminUser = (): boolean => {
-	// Get auth details from session storage
-	const isAdmin = sessionStorage.getItem("isAdmin") === "true" ? true : false;
-
-	return isAdmin;
+	return sessionStorage.getItem('isAdmin') === 'true';
 };

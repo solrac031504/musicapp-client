@@ -1,49 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { isAuthenticated } from "../../utils/authentication/authentication.ts";
+import { isAuthenticated } from '../../utils/authentication/authentication.ts';
+
+const REDIRECT_SECONDS = 10;
 
 const NotFound: React.FC = () => {
-    const navigate = useNavigate(); 
-    const redirectTime = 10000; // 10 seconds in ms
+	const navigate = useNavigate();
+	const [secondsLeft, setSecondsLeft] = useState(REDIRECT_SECONDS);
 
-    const [secondsLeft, setSecondsLeft] = useState(redirectTime / 1000);
+	useEffect(() => {
+		const timerId = setTimeout(() => navigate('/home'), REDIRECT_SECONDS * 1000);
+		return () => clearTimeout(timerId);
+	}, [navigate]);
 
-    // Redirect after 10 seconds
-    useEffect(() => {
-        const timerId = setTimeout(() => {
-            navigate('/home');
-        }, redirectTime);
+	useEffect(() => {
+		if (secondsLeft <= 0) return;
+		const intervalId = setInterval(() => setSecondsLeft((s) => s - 1), 1000);
+		return () => clearInterval(intervalId);
+	}, [secondsLeft]);
 
-        // Clearn timeout
-        return () => clearTimeout(timerId);
-    }, [navigate]);
+	if (!isAuthenticated()) {
+		return <Navigate to="/" replace />;
+	}
 
-    // Update the time left
-    useEffect(() => {
-        // Exit when time reaches 0
-        if (secondsLeft <= 0) return;
-
-        // Update every second
-        const intervalId = setInterval(() => {
-            setSecondsLeft(prevSeconds => prevSeconds - 1);
-        }, 1000);
-
-        return () => clearInterval(intervalId);
-    }, [secondsLeft])
-
-    if (isAuthenticated()) {
-        // Show 404 page for authenticated users
-        return (
-            <div className="not-found-container">
-                <h1>404 - Page Not Found</h1>
-                <p>The page you're looking for doesn't exist.</p>
-                <p>You will redirected to the home page in {secondsLeft} seconds...</p>
-            </div>
-        );
-    } else {
-        // Redirect unauthenticated users to login
-        return <Navigate to="/" replace />;
-    }
+	return (
+		<div className="not-found-container">
+			<h1>404 - Page Not Found</h1>
+			<p>The page you&apos;re looking for doesn&apos;t exist.</p>
+			<p>You will be redirected to the home page in {secondsLeft} seconds...</p>
+		</div>
+	);
 };
 
 export default NotFound;
