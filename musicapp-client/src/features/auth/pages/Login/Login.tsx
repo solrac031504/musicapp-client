@@ -1,24 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiRequest } from "../../../../services/api.client.ts";
+import { LoginRequest, LoginResponse } from "../../types/Login.types.ts";
 import styles from './Login.module.css';
-
-interface LoginResponse {
-	item: {
-		isAuthenticated: boolean;
-		authExpiration: Date | null;
-		isAdmin: boolean;
-		errorMessage: string | null;
-	};
-}
-
-interface LoginRequest {
-	item: {
-		username: string;
-		password: string;
-	};
-}
-
-const BASE_URL = 'http://localhost:5000';
 
 const Login: React.FC = () => {
 	const navigate = useNavigate();
@@ -33,20 +17,22 @@ const Login: React.FC = () => {
 		setLoading(true);
 		setError('');
 
-		const req: LoginRequest = {
-			item: { username, password },
-		};
+		// const req: LoginRequest = {
+		// 	item: { username, password },
+		// };
+
+		const req = {
+			item: {
+				username,
+				password
+			}
+		} as LoginRequest;
 
 		try {
-			const res = await fetch(`${BASE_URL}/login`, {
+			const result = await apiRequest<LoginResponse>('/login', {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(req),
+				body: req
 			});
-
-			if (!res.ok) throw new Error(`HTTP error: status ${res.status}`);
-
-			const result: LoginResponse = await res.json();
 
 			if (result.item.isAuthenticated) {
 				const loginExpiration = new Date(result.item.authExpiration!);
