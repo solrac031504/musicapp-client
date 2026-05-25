@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  type-check:
+    name: Install and type check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: musicapp-client
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Install dependencies
+        run: deno install
+
+      - name: Type check
+        run: deno check src
