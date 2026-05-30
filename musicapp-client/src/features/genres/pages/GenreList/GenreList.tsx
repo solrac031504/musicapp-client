@@ -48,7 +48,7 @@ const GenreList: React.FC = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{genres.items.map((genre) => (
+						{genres.items.sort((a, b) => a.genreName.localeCompare(b.genreName)).map((genre) => (
 							<tr key={genre.id} className={styles.row}>
 								<td className={styles.cell}>
 									<Link
