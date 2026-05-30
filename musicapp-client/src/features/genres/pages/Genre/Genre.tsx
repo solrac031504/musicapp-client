@@ -4,6 +4,7 @@ import { apiRequest } from "../../../../services/api.client.ts";
 import { isAdminUser } from "../../../auth/index.ts";
 import { getCurrentUser } from "../../../shared/utils/session-info.ts";
 import type { GenreRequest, GenreResponse, UpdateGenreRequest } from "../../types/Genre.types.ts";
+import type { GenreHierarchyRequest, GenreHierarchyResponse } from "../../types/GenreHierarchy.types.ts";
 import styles from "./Genre.module.css";
 
 const Genre: React.FC = () => {
@@ -15,8 +16,7 @@ const Genre: React.FC = () => {
 	const [genreDescription, setGenreDescription] = useState<string>("");
 	const [editedDescription, setEditedDescription] = useState<string>("");
 	const [createdBy, setCreatedBy] = useState<string>("");
-	// const [genreHierarchy, setGenreHierarchy] = useState<string[]>([]);
-	const genreHierarchy: string[] = []; // TODO: get genre hierarchy
+	const [genreHierarchy, setGenreHierarchy] = useState<string[]>([]);
 	const [isEditing, setIsEditing] = useState<boolean>(false);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -34,6 +34,11 @@ const Genre: React.FC = () => {
 			setGenreName(genre.genreName);
 			setGenreDescription(genre.description);
 			setCreatedBy(genre.createdBy);
+
+			const hierarchyResult = await apiRequest<GenreHierarchyRequest, GenreHierarchyResponse>(`/genre-hierarchies?genreId=${genreId}`);
+			const hierarchies = hierarchyResult.items.map((h) => h.hierarchyPath);
+
+			if (hierarchyResult.count > 0) setGenreHierarchy(hierarchies);
 		} catch (err) {
 			console.error("Error retrieving genre info:", err);
 		} finally {
