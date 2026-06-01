@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { apiRequest } from "../../../../services/api.client.ts";
 import { isAdminUser } from "../../../auth/index.ts";
 import { getCurrentUser } from "../../../shared/utils/session-info.ts";
-import type { GenreRequest, GenreResponse, UpdateGenreRequest } from "../../types/Genre.types.ts";
+import { type GenreRequest, type GenreResponse, type UpdateGenreRequest } from "../../types/Genre.types.ts";
 import type { GenreHierarchyRequest, GenreHierarchyResponse } from "../../types/GenreHierarchy.types.ts";
 import styles from "./Genre.module.css";
 
@@ -17,6 +17,8 @@ const Genre: React.FC = () => {
 	const [editedDescription, setEditedDescription] = useState<string>("");
 	const [createdBy, setCreatedBy] = useState<string>("");
 	const [genreHierarchy, setGenreHierarchy] = useState<string[]>([]);
+	const [childGenres, setChildGenres] = useState<GenreHierarchyResponse>();
+	const [isGenreHierarchyOpen, setGenreHierarchyOpen] = useState<boolean>(true);
 	const [isEditing, setIsEditing] = useState<boolean>(false);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,7 +38,8 @@ const Genre: React.FC = () => {
 			setCreatedBy(genre.createdBy);
 
 			const hierarchyResult = await apiRequest<GenreHierarchyRequest, GenreHierarchyResponse>(`/genre-hierarchies?genreId=${genreId}`);
-			const hierarchies = hierarchyResult.items.map((h) => h.hierarchyPath);
+			// Sort by the level then alphabetically
+			const hierarchies = hierarchyResult.items.sort((a, b) => a.level - b.level).map((h) => h.hierarchyPath).sort((a, b) => a.localeCompare(b));
 
 			if (hierarchyResult.count > 0) setGenreHierarchy(hierarchies);
 		} catch (err) {
@@ -91,7 +94,7 @@ const Genre: React.FC = () => {
 	};
 
 	const handleDelete = async (): Promise<void> => {
-		if (!confirm(`Are you sure you want to delete "${genreName}"?`)) return;
+		if (!confirm(`Are you sure you want to delete "${genreName}"? This action will delete all linked items.`)) return;
 
 		try {
 			await apiRequest(`/genres/${id}`, {
@@ -110,6 +113,17 @@ const Genre: React.FC = () => {
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.backButtonWrapper}>
+				<button
+					className={styles.backButton}
+					onClick={() => navigate(-1)}
+					title="Go back"
+					aria-label="Go back"
+					type="button"
+				>
+					Back
+				</button>
+			</div>
 			<main className={styles.content}>
 				<div className={styles.header}>
 					<h1 className={styles.title}>{genreName}</h1>
