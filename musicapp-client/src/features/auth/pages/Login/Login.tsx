@@ -53,7 +53,7 @@ const Login: React.FC = () => {
 		<div className={styles.loginContainer}>
 			<div className={styles.loginCard}>
 				<div className={styles.loginHeader}>
-					<h2>Welcome to Music App</h2>
+					<h2>Welcome to MusicManagementHub</h2>
 					<p>Sign in to your account</p>
 				</div>
 

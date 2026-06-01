@@ -6,7 +6,7 @@ const Navbar: React.FC = () => {
 	return (
 		<header className={styles.navbar}>
 			<NavLink to="/home" className={styles.brand}>
-				Music<span>App</span>
+				MusicManagement<span>Hub</span>
 			</NavLink>
 			<nav className={styles.nav}>
 				<NavLink
