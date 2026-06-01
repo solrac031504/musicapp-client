@@ -206,27 +206,29 @@ const Genre: React.FC = () => {
 						))}
 					</tbody>
 				</table>
-				<table>
-					<thead>
-						<tr>
-							<th>Child Genres</th>
-						</tr>
-					</thead>
-					<tbody>
-						{childGenres.items.sort((a, b) => a.genreName.localeCompare(b.genreName)).map((genre) => (
-							<tr key={genre.genreId}>
-								<td>
-									<Link
-										to={`/genre/${genre.genreId}`}
-										className={genreListStyles.genreLink}
-									>
-										{genre.genreName}
-									</Link>
-								</td>
+				{childGenres.count > 0 && (
+					<table>
+						<thead>
+							<tr>
+								<th>Child Genres</th>
 							</tr>
-						))}
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							{childGenres.items.sort((a, b) => a.genreName.localeCompare(b.genreName)).map((genre) => (
+								<tr key={genre.genreId}>
+									<td>
+										<Link
+											to={`/genre/${genre.genreId}`}
+											className={genreListStyles.genreLink}
+										>
+											{genre.genreName}
+										</Link>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				)}
 			</main>
 		</div>
 	);
