@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { apiRequest } from "../../../../services/api.client.ts";
 import { isAdminUser } from "../../../auth/index.ts";
 import { getCurrentUser } from "../../../shared/utils/session-info.ts";
-import { type GenreRequest, type GenreResponse, type UpdateGenreRequest } from "../../types/Genre.types.ts";
+import type { GenreRequest, GenreResponse, UpdateGenreRequest } from "../../types/Genre.types.ts";
 import type { GenreHierarchyRequest, GenreHierarchyResponse } from "../../types/GenreHierarchy.types.ts";
 import styles from "./Genre.module.css";
 
@@ -17,8 +17,7 @@ const Genre: React.FC = () => {
 	const [editedDescription, setEditedDescription] = useState<string>("");
 	const [createdBy, setCreatedBy] = useState<string>("");
 	const [genreHierarchy, setGenreHierarchy] = useState<string[]>([]);
-	const [childGenres, setChildGenres] = useState<GenreHierarchyResponse>();
-	const [isGenreHierarchyOpen, setGenreHierarchyOpen] = useState<boolean>(true);
+	const [childGenres, setChildGenres] = useState<GenreHierarchyResponse>({ items: [], count: 0 });
 	const [isEditing, setIsEditing] = useState<boolean>(false);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -27,6 +26,7 @@ const Genre: React.FC = () => {
 		try {
 			setIsLoading(true);
 
+			// Get genre info
 			const result = await apiRequest<GenreRequest, GenreResponse>(`/genres/${genreId}`, {
 				method: "GET",
 			});
@@ -37,11 +37,20 @@ const Genre: React.FC = () => {
 			setGenreDescription(genre.description);
 			setCreatedBy(genre.createdBy);
 
+			// Get hierarchy info
 			const hierarchyResult = await apiRequest<GenreHierarchyRequest, GenreHierarchyResponse>(`/genre-hierarchies?genreId=${genreId}`);
 			// Sort by the level then alphabetically
 			const hierarchies = hierarchyResult.items.sort((a, b) => a.level - b.level).map((h) => h.hierarchyPath).sort((a, b) => a.localeCompare(b));
 
-			if (hierarchyResult.count > 0) setGenreHierarchy(hierarchies);
+			setGenreHierarchy(hierarchies);
+
+			// Get child genres
+			const childGenreResult = await apiRequest<GenreHierarchyRequest, GenreHierarchyResponse>(`/genre-hierarchies?parentGenreId=${genreId}`);
+
+			// Dedupe keys
+			const uniqueChildGenres = [...new Map(childGenreResult.items.map((genre) => [genre.genreId, genre])).values()];
+
+			setChildGenres({ items: uniqueChildGenres, count: uniqueChildGenres.length });
 		} catch (err) {
 			console.error("Error retrieving genre info:", err);
 		} finally {
@@ -192,6 +201,26 @@ const Genre: React.FC = () => {
 						{genreHierarchy.map((result, index) => (
 							<tr key={index}>
 								<td>{result}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+				<table>
+					<thead>
+						<tr>
+							<th>Child Genres</th>
+						</tr>
+					</thead>
+					<tbody>
+						{childGenres.items.sort((a, b) => a.genreName.localeCompare(b.genreName)).map((genre) => (
+							<tr key={genre.genreId}>
+								<td>
+									<Link
+										to={`/genre/${genre.genreId}`}
+									>
+										{genre.genreName}
+									</Link>
+								</td>
 							</tr>
 						))}
 					</tbody>
