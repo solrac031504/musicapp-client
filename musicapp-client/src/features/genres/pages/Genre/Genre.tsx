@@ -5,6 +5,7 @@ import { isAdminUser } from "../../../auth/index.ts";
 import { getCurrentUser } from "../../../shared/utils/session-info.ts";
 import type { GenreRequest, GenreResponse, UpdateGenreRequest } from "../../types/Genre.types.ts";
 import type { GenreHierarchyRequest, GenreHierarchyResponse } from "../../types/GenreHierarchy.types.ts";
+import genreListStyles from "../GenreList/GenreList.module.css";
 import styles from "./Genre.module.css";
 
 const Genre: React.FC = () => {
@@ -217,6 +218,7 @@ const Genre: React.FC = () => {
 								<td>
 									<Link
 										to={`/genre/${genre.genreId}`}
+										className={genreListStyles.genreLink}
 									>
 										{genre.genreName}
 									</Link>
