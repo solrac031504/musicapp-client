@@ -107,6 +107,76 @@
     font-size: 1.125rem;
 }
 
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px 32px 100px 32px; /* bottom padding so content isn't hidden behind nav */
+}
+
+.letterSection {
+    margin-bottom: 32px;
+    scroll-margin-top: 80px; /* offset for any fixed navbar */
+}
+
+.letterHeading {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+}
+
+/* Sticky letter nav at the bottom */
+.letterNav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid #e2e8f0;
+    z-index: 100;
+}
+
+.letterButton {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 6px;
+    background: #fff;
+    color: #1e293b;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.letterButton:hover:not(:disabled) {
+    background: #667eea;
+    border-color: #667eea;
+    color: #fff;
+}
+
+.letterButtonActive {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: transparent;
+    color: #fff;
+}
+
+.letterButtonDisabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .container {
@@ -170,5 +240,19 @@
     
     .genreLink:hover {
         color: #ffffffb6;
+    }
+
+    .letterHeading {
+        color: #f8fafc;
+        border-bottom-color: #334155;
+    }
+    .letterNav {
+        background: rgba(15, 23, 42, 0.95);
+        border-top-color: #334155;
+    }
+    .letterButton {
+        background: #1e293b;
+        border-color: #334155;
+        color: #f8fafc;
     }
 }
